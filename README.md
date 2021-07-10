@@ -1,5 +1,6 @@
 # COEP_MathSolvers
-Math solvers
+**Math solvers**
+
 **Problem 1**
 Everybody loves palindromes, but Artur doesn't.
 He has a string S that consists of lowercase English letters ('a' - 'z'). Artur wants to find a substring T of S of the maximal length, so that T isn't a palindrome.
