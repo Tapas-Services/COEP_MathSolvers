@@ -61,12 +61,11 @@ For n = 3, the program should print following:
 3
 
 **Problem 9**
-2) Check whether a given point lies inside a triangle or not.
+Check whether a given point lies inside a triangle or not.
 
-**Problem 10**
-4) Find day of the week for a given date.
+**Problem 10** Find day of the week for a given date.
 
 **Problem 11**
-5) Print all prime factors of a given number.
+Print all prime factors of a given number.
 For eg;
 if the input number is 12, then output should be “2 2 3”.
