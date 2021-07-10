@@ -47,7 +47,7 @@ Probability of reaching a point with 2 or 3 steps at a time
 A person starts walking from position X = 0, find the probability to reach exactly on X = N if she can only take either 2 steps or 3 steps. Probability for step length 2 is given i.e. P, probability for step length 3 is 1 – p.
 
 **Problem 8**
-1) Print all combinations of points that can compose a given number.
+Print all combinations of points that can compose a given number.
 For eg;
 For n = 1, the program should print following:
 1
