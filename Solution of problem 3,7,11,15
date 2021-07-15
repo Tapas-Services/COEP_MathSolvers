@@ -84,8 +84,8 @@ int main()
 } 
 
 **Problem 15**
+Write a program to check two circles intersect to each other or not.
 
-Check if two given circles touch or intersect each other.
 
 **Solution:**
 
