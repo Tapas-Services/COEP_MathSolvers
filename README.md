@@ -20,6 +20,30 @@ Explanation: 3+8 = 4+7
 **Problem 3**
 Find number of solutions of a linear equation of n variables
 Given a linear equation of n variables, find number of non-negative integer solutions of it. For example,let the given equation be “x + 2y = 5”, solutions of this equation are “x = 1, y = 2”, “x = 5, y = 0” and “x = 1. It may be assumed that all coefficients in given equation are positive integers.
+**Solution**
+#include<bits/stdc++.h>
+using namespace std;
+int countSol(int coeff[], int start,  int end, int rhs) 
+{
+if (rhs == 0) 
+ return 1; 
+  int result = 0; 
+ for (int i = start; i <= end; i++) 
+    if (coeff[i] <= rhs) 
+        result += countSol(coeff, i, end  ,rhs - coeff[i]); 
+                  return result;
+}
+// Driver Code
+
+int main() 
+
+{
+  int coeff[] = {2, 2, 5}; 
+ int rhs = 4; 
+    int n = sizeof(coeff) / sizeof(coeff[0]); 
+   cout << countSol(coeff, 0, n - 1, rhs); 
+  return 0; 
+}
 
 **Problem 4**
 Probability of reaching a point with 2 or 3 steps at a time
