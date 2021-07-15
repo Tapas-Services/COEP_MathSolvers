@@ -20,6 +20,8 @@ Explanation: 3+8 = 4+7
 **Problem 3**
 Find number of solutions of a linear equation of n variables
 Given a linear equation of n variables, find number of non-negative integer solutions of it. For example,let the given equation be “x + 2y = 5”, solutions of this equation are “x = 1, y = 2”, “x = 5, y = 0” and “x = 1. It may be assumed that all coefficients in given equation are positive integers.
+
+
 **Solution**
 #include<bits/stdc++.h>
 using namespace std;
