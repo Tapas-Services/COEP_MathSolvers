@@ -1,0 +1,171 @@
+** PROBLEM 2 **
+#include<bits/stdc++.h>
+using namespace std;
+
+bool findPairs(int arr[], int n)
+{
+  // Creating an empty Hash to store mapping from sum to pair indexes
+    map<int, pair<int, int>> Hash;
+
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = i + 1; j < n; ++j)
+        {
+            // If sum of current pair is not in hash,
+            // then store it and continue to next pair
+            int sum = arr[i] + arr[j];
+            if (Hash.find(sum) == Hash.end())
+                Hash[sum] = make_pair(i, j);
+
+            else 
+            {
+                pair<int, int> pp = Hash[sum];// pp->previous pair
+                
+                cout << "(" << arr[pp.first] << ", " << arr[pp.second]
+                    << ") and (" << arr[i] << ", " << arr[j] << ")";
+                return true;
+            }
+        }
+    }
+
+    cout << "No pairs found";
+    return false;
+}
+
+int main()
+{
+    int arr[] = {2, 3, 5, 6, 1, 7, 4};
+    int n = sizeof arr / sizeof arr[0];
+    findPairs(arr, n);
+    return 0;
+}
+
+** PROBLEM 6 **
+#include <bits/stdc++.h>
+using namespace std;
+
+ double find(int N, int sum)
+{
+    // Base cases
+    if (sum > 6 * N || sum < N)
+        return 0;
+
+    if (N == 1) {
+
+        if (sum >= 1 && sum <= 6)
+            return 1.0 / 6;
+        else
+            return 0;
+    }
+    double s = 0;
+    for (int i = 1; i <= 6; i++)
+        s = s + find(N - 1, sum - i) / 6;
+
+    return s;
+}
+
+int main()
+{
+    int N = 6, P = 5, Q = 7;
+    double probability = 0.0;
+
+    for (int sum = P; sum <= Q; sum++)
+        probability = probability + find(N, sum);
+
+    cout << probability;
+    return 0;
+}
+
+
+** PROBLEM 10 **
+#include<iostream>
+using namespace std;
+
+float area(int x1, int y1, int x2, int y2, int x3, int y3)
+{
+   return abs((x1*(y2-y3) + x2*(y3-y1)+ x3*(y1-y2))/2.0);
+}
+
+bool isInside(int x1, int y1, int x2, int y2, int x3, int y3, int x, int y)
+{
+   /* Calculate area of triangle ABC */
+   float A = area (x1, y1, x2, y2, x3, y3);
+
+   /* Calculate area of triangle PBC */
+   float A1 = area (x, y, x2, y2, x3, y3);
+
+   /* Calculate area of triangle PAC */
+   float A2 = area (x1, y1, x, y, x3, y3);
+
+   /* Calculate area of triangle PAB */
+   float A3 = area (x1, y1, x2, y2, x, y);
+
+   /* Check if sum of A1, A2 and A3 is same as A */
+   return (A == A1 + A2 + A3);
+}
+
+int main()
+{
+      float x1,y1,x2, y2, x3, y3,x,y;
+  cout<<"Enter x-coefficient of point A : ";
+  cin>>x1;
+  cout<<"Enter y-coefficient of point A : ";
+  cin>>y1;
+  cout<<"Enter x-coefficient of point B : ";
+  cin>>x2;
+  cout<<"Enter y-coefficient of point B : ";
+  cin>>y2;
+  cout<<"Enter x-coefficient of point C : ";
+  cin>>x3;
+  cout<<"Enter y-coefficient of point C : ";
+  cin>>y3;
+  cout<<"Enter x-coefficient of point P : ";
+  cin>>x;
+  cout<<"Enter y-coefficient of point P : ";
+  cin>>y;
+
+   if (isInside(x1, y1, x2, y2, x3, y3, x, y))
+     printf ("Inside");
+   else
+     printf ("Not Inside");
+return 0;
+}
+
+
+** PROBLEM 14 **
+#include<iostream>
+using namespace std;
+
+int removeDuplicates(int arr[], int n)
+{
+    if (n==0 || n==1)
+        return n;
+
+    int j = 0;
+    // If current element is not equal to next element then store that current element
+    
+    for (int i=0; i < n-1; i++)
+        if (arr[i] != arr[i+1])
+            arr[j++] = arr[i];
+
+    arr[j++] = arr[n-1];
+
+    return j;
+}
+
+
+int main()
+{
+    int arr[] = {1, 1, 2, 3, 3, 4, 5, 5, 6, 6};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    // removeDuplicates() & returns new size of array.
+    n = removeDuplicates(arr, n);
+
+    // Print updated array
+    for (int i=0; i<n; i++)
+        cout << arr[i] << " ";
+
+    return 0;
+}
+
