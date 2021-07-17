@@ -40,6 +40,7 @@ int main()
     return 0;
 }
 
+
 ** PROBLEM 6 **
 #include <bits/stdc++.h>
 using namespace std;
@@ -130,6 +131,7 @@ int main()
      printf ("Not Inside");
 return 0;
 }
+
 
 
 ** PROBLEM 14 **
