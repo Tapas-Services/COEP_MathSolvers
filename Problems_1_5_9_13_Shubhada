@@ -1,0 +1,368 @@
+** Problem 1 **
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+	string s;
+	cout<<"Enter the string :"<<endl;
+	cin >> s;
+	int n = s.size();
+	int cnt = 0;
+	for (int i = 0; i < n; i++)
+		cnt += s[i] == s[0];
+	if (cnt == n)
+	{
+		cout << "0";
+		return 0;
+	}
+	cnt = 0;
+	for (int i = 0; i < n; i++)
+		cnt += s[i] == s[n - i -1];
+	if (cnt == n)
+	{
+		cout << n - 1;
+		
+		return 0;
+	}
+	cout << n;
+	return 0;
+}
+
+** Problem 5 **
+#include <bits/stdc++.h>
+using namespace std;
+void possibleNumbers(int N, int M,
+                     int A, int B)
+{
+    if (A > B) {
+        swap(A, B);
+    }
+
+    int number = N + M * A;
+    cout << number << " ";
+
+    if (A != B) {
+
+        for (int i = 0; i < M; i++) {
+
+            number = number - A + B;
+            cout << number << " ";
+        }
+    }
+}
+int main()
+{
+    // Given Input
+    int N = 56, M = 4, A = 8, B = 10;
+
+    // Function Call
+    possibleNumbers(N, M, A, B);
+    return 0;
+}
+
+
+** Problem 9 **
+#define MAX_POINT 3
+#define ARR_SIZE 100
+#include <bits/stdc++.h>
+using namespace std;
+void printArray(int arr[], int arr_size);
+
+void printCompositions(int n, int i)
+{
+    static int arr[ARR_SIZE];
+    if (n == 0)
+    {
+        printArray(arr, i);
+    }
+    else if(n > 0)
+    {
+        int k;
+        for (k = 1; k <= MAX_POINT; k++)
+        {
+            arr[i]= k;
+            printCompositions(n-k, i+1);
+        }
+    }
+}
+void printArray(int arr[], int arr_size)
+{
+    int i;
+    for (i = 0; i < arr_size; i++)
+        cout<<arr[i]<<" ";
+    cout<<endl;
+}
+
+int main()
+{
+    int n ;
+    cout<<"Number of compositions you want :";cin>>n;
+
+    cout<<"Different compositions formed by 1, 2 and 3 of "<<n<<" are\n";
+    printCompositions(n, 0);
+    return 0;
+}
+
+** Problem 13 **
+#include<iostream>
+using namespace std;
+int isyearleap(int y)
+{
+    if((y%4 ==0)&&(y%100))
+    {
+        return 1;
+    }
+    else
+        return 0;
+}
+int no_of_days_in_month(int m,int y)
+{
+    if(m==1 || m==3 || m==5 || m==7 || m==8 || m==10 || m==12)
+    {
+        return 31;
+    }
+    if(m==4 || m==6 || m==9 || m==11)
+    {
+        return 30;
+    }
+    if(m==2)
+    {
+        int n = isyearleap(y);
+        if(n==1)
+        {
+            return 29;
+        }
+        else
+        {
+            return 28;
+        }
+
+    }
+}
+long long int difference_of_dates(int d1,int d2,int m1,int m2,int y1,int y2)
+{
+    if(y1==y2)
+    {
+        if(m1 == m2)
+        {
+            if(d1 == d2)
+            {
+                return 0;
+            }
+            else
+            {
+                return abs(d1-d2);
+            }
+        }
+        else if(m1<m2)
+        {
+          int result;
+          for(int i=m1;i<m2;i++)
+          {
+              result = 0;
+              result = result + no_of_days_in_month(m1,y1);
+              if(d1==d2)
+              {
+                  return result;
+              }
+              if(d1<d2)
+              {
+                  result = result + (d2-d1);
+                  return result;
+              }
+              if(d1>d2)
+              {
+                  result = result -(d2-d1);
+                  return result;
+              }
+          }
+        }
+        else
+        {
+          int result;
+          for(int i=m2;i<m1;i++)
+          {
+              result = 0;
+              result = result + no_of_days_in_month(i, y1);
+              if(d1==d2)
+              {
+                  return result;
+              }
+              if(d1<d2)
+              {
+                  result = result + (d2-d1);
+                  return result;
+              }
+              if(d1>d2)
+              {
+                  result = result -(d2-d1);
+                  return result;
+              }
+          }
+        }
+    }
+    else if(y1<y2)
+    {
+        int temp=0;
+        for(int i=y1; i<y2; i++)
+        {
+            if(isyearleap(i))
+                temp=temp+366;
+            else
+                temp=temp+365;
+        }
+
+        if(m1==m2)
+        {
+            if(d1==d2)      //for same month, same day but diff year
+                return temp;
+            else if(d1<d2)
+                return temp+(d2-d1);
+            else
+                return temp-(d1-d2);
+        }
+        else if(m1<m2)
+        {
+            int result=0;
+            for(int i=m1; i<m2; i++)
+            result=result+no_of_days_in_month(i,y2);
+
+            if(d1==d2)      // for same day, diff year and diff month
+                return temp+result;
+            else if(d1<d2)
+            {
+                result=result+(d2-d1);
+                return temp+result;
+            }
+            else
+            {
+                result=result-(d1-d2);
+                return temp+result;
+            }
+        }
+        else
+        {
+            int result=0;
+            for(int i=m2; i<m1; i++)
+            result=result+no_of_days_in_month(i, y2);
+
+            if(d1==d2)
+                return temp-result;
+            else if(d2<d1)
+            {
+                result=result+(d1-d2);
+                return temp-result;
+            }
+            else
+            {
+                result=result-(d2-d1);
+                return temp-result;
+            }
+        }
+    }
+    else
+    {
+        int temp=0;
+        for(int i=y2; i<y1; i++)
+        {
+            if(isyearleap(i))
+                temp=temp+366;
+            else
+                temp=temp+365;
+        }
+
+        if(m1==m2)
+        {
+            if(d1==d2)      // for same day, same month but diff year
+                return temp;
+            else if(d2<d1)
+                return temp+(d1-d2);
+            else
+                return temp-(d2-d1);
+        }
+        else if(m2<m1)
+        {
+            int result=0;
+            for(int i=m2; i<m1; i++)
+            result=result+no_of_days_in_month(i,y1);
+
+            if(d1==d2)
+                return temp+result;
+            else if(d2<d1)
+            {
+                result=result+(d1-d2);
+                return temp+result;
+            }
+            else
+            {
+                result=result-(d2-d1);
+                return temp+result;
+            }
+        }
+        else
+        {
+            int result=0;
+            for(int i=m1; i<m2; i++)
+            result=result+no_of_days_in_month(i,y1);
+
+            if(d1==d2)      // for same day, diff year and diff month
+                return temp-result;
+            else if(d1<d2)
+            {
+                result=result+(d2-d1);
+                return temp-result;
+            }
+            else
+            {
+                result=result-(d1-d2);
+                return temp-result;
+            }
+        }
+    }
+}
+int main()
+{
+    int d1,d2,y1,y2,m1,m2;
+    cout<<" **Enter The first date **"<<endl;
+    cout<<"Day of first date:";cin>>d1;
+    if(d1< 1 || d1>31)
+    {
+        cout<<"!!!Invalid Day !!!"<<endl;
+        cout<<"Please Enter the day of first date again :";cin>>d1;
+    }
+    cout<<"Month of first date:";cin>>m1;
+    if(m1<1 || m1>12)
+    {
+        cout<<"!!!Invalid Day !!!"<<endl;
+        cout<<"Please Enter the month of first date again :";cin>>m1;
+    }
+    cout<<"Year of first date:";cin>>y1;
+    if(y1<1)
+    {
+       cout<<"!!!Invalid Day !!!"<<endl;
+       cout<<"Please Enter the year of first date again :";cin>>y1;
+    }
+    cout<<"\n**Enter The second date **"<<endl;
+    cout<<"Day of second date:";cin>>d2;
+    if(d2< 1 || d2>31)
+    {
+        cout<<"!!!Invalid Day !!!"<<endl;
+        cout<<"Please Enter the day of second date again :";cin>>d2;
+    }
+    cout<<"Month of second date:";cin>>m2;
+    if(m2<1 || m2>12)
+    {
+        cout<<"!!!Invalid Day !!!"<<endl;
+        cout<<"Please Enter the month of second date again";cin>>m2;
+    }
+    cout<<"Year of second date:";cin>>y2;
+    if(y2<1)
+    {
+       cout<<"!!!Invalid Day !!!"<<endl;
+       cout<<"Please Enter the year of second date again";cin>>y2;
+    }
+    long long int diff = difference_of_dates(d1,d2,m1,m2,y1,y2);
+    cout<<"Difference between two dates :"<<diff;
+
+    return 0;
+}
